@@ -8,13 +8,14 @@ interface ProductProps {
 }
 
 async function getProduct(slug: string): Promise<Product> {
+  console.log(slug)
   const response = await api(`/products/${slug}`, {
     next: {
       revalidate: 60 * 60,
     },
   })
 
-  const { product } = await response.json()
+  const product = await response.json()
   console.log('product - ', product)
   return product
 }
