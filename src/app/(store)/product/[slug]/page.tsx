@@ -1,3 +1,4 @@
+import AddToCartButton from '@/app/components/add-to-cart-button'
 import { api } from '@/data/api '
 import { Product } from '@/data/types/product'
 import { Metadata } from 'next'
@@ -40,7 +41,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductPage({ params }: ProductProps) {
-  const { image, price, description, title } = await getProduct(params.slug)
+  const { image, price, description, title, id } = await getProduct(params.slug)
   return (
     <div className="relative grid max-h-[860px] grid-cols-3">
       <div className="col-span-2 overflow-hidden">
@@ -100,12 +101,7 @@ export default async function ProductPage({ params }: ProductProps) {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
-        >
-          Adicionar ao carrinho
-        </button>
+        <AddToCartButton productId={id} />
       </div>
     </div>
   )
